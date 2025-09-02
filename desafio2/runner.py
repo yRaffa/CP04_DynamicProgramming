@@ -20,11 +20,11 @@ def memoria_divide_conquer(projetos, orcamento):
     return divide_conquer_d2(projetos, orcamento)
 
 # Funções para medir tempo e memória do metodo Dynamic Programming do Desafio 2
-@medir_memoria
-def memoria_dynamic_programming(projetos, orcamento):
-    return dynamic_programming_d2(projetos, orcamento)
 @medir_tempo
 def tempo_dynamic_programming(projetos, orcamento):
+    return dynamic_programming_d2(projetos, orcamento)
+@medir_memoria
+def memoria_dynamic_programming(projetos, orcamento):
     return dynamic_programming_d2(projetos, orcamento)
 
 def executar_d2(dias):

@@ -25,9 +25,9 @@ def medir_memoria(func):
     return wrapper
 
 # Função para gerar aleatóreamente os teste para o desafio 1
-def gerar_testes_d1(n, custo_min = 2, custo_max = 20, benef_min = 10, benef_max = 120):
+def gerar_testes_d1(n, custo_min = 2, custo_max = 20, beneficio_min = 10, beneficio_max = 120):
     projetos = [(random.randint(custo_min, custo_max),
-                 random.randint(benef_min, benef_max)) for _ in range(n)]
+                 random.randint(beneficio_min, beneficio_max)) for _ in range(n)]
     return projetos
 
 # Função para gerar aleatóreamente os teste para o desafio 2
