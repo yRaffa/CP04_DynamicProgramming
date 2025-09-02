@@ -60,4 +60,3 @@ def grafico_memoria(df, titulo):
     plt.legend()
     plt.grid(True)
     plt.show()
-    
