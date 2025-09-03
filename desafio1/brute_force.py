@@ -6,35 +6,24 @@ from typing import List, Tuple
 
 def brute_force_d1(projetos: List[Tuple[int, int]], orcamento: int) -> int:
     """
-    Força bruta via bitmask: testa todos os subconjuntos.
-    Retorna o maior benefício possível sem ultrapassar o orçamento.
+    Resolve o problema da mochila (0/1 Knapsack) via força bruta.
+    Testa todos os subconjuntos possíveis e retorna o melhor benefício.
     """
     n = len(projetos)
     best = 0
 
-    # Para cada subconjunto representado por mask (0 .. 2^n - 1)
-    for mask in range(1 << n):
-        custo = 0
-        beneficio = 0
-        # acumula custo/benefício dos itens presentes no mask
-        i = 0
-        m = mask
-        while m:
-            if m & 1:
+    for mask in range(1 << n):  # percorre todos os subconjuntos
+        custo, beneficio = 0, 0
+        for i in range(n):
+            if mask & (1 << i):  # se o projeto i está no subconjunto
                 c, b = projetos[i]
                 custo += c
                 beneficio += b
-                # early break se passar do orçamento (pequima otimização)
-                if custo > orcamento:
-                    break
-            i += 1
-            m >>= 1
-        else:
-            # só atualiza se não quebrou por ultrapassar orçamento
-            if custo <= orcamento and beneficio > best:
-                best = beneficio
+        if custo <= orcamento:
+            best = max(best, beneficio)
 
     return best
+
 
 '''
 def brute_force_d1(projetos, orcamento):

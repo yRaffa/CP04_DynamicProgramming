@@ -5,30 +5,33 @@ from utils import medir_tempo, medir_memoria
 
 # Funções para medir tempo e memória do metodo Brute Force do Desafio 2
 @medir_tempo
-def tempo_brute_force(projetos, orcamento):
-    return brute_force_d2(projetos, orcamento)
+def tempo_brute_force(dias):
+    return brute_force_d2(dias)
 @medir_memoria
-def memoria_brute_force(projetos, orcamento):
-    return brute_force_d2(projetos, orcamento)
+def memoria_brute_force(dias):
+    return brute_force_d2(dias)
 
 # Funções para medir tempo e memória do metodo Divide & Conquer do Desafio 2
 @medir_tempo
-def tempo_divide_conquer(projetos, orcamento):
-    return divide_conquer_d2(projetos, orcamento)
+def tempo_divide_conquer(dias):
+    return divide_conquer_d2(dias)
 @medir_memoria
-def memoria_divide_conquer(projetos, orcamento):
-    return divide_conquer_d2(projetos, orcamento)
+def memoria_divide_conquer(dias):
+    return divide_conquer_d2(dias)
 
 # Funções para medir tempo e memória do metodo Dynamic Programming do Desafio 2
 @medir_tempo
-def tempo_dynamic_programming(projetos, orcamento):
-    return dynamic_programming_d2(projetos, orcamento)
+def tempo_dynamic_programming(dias):
+    return dynamic_programming_d2(dias)
 @medir_memoria
-def memoria_dynamic_programming(projetos, orcamento):
-    return dynamic_programming_d2(projetos, orcamento)
+def memoria_dynamic_programming(dias):
+    return dynamic_programming_d2(dias)
 
 def executar_d2(dias):
-    resultados = {}
+    n = len(dias)
+    resultados = {
+        "n": n
+    }
     # Brute Force
     tempo = tempo_brute_force(dias)['tempo']
     memoria = memoria_brute_force(dias)['memoria']

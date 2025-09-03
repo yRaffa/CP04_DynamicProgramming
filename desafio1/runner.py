@@ -28,7 +28,10 @@ def memoria_dynamic_programming(projetos, orcamento):
     return dynamic_programming_d1(projetos, orcamento)
 
 def executar_d1(projetos, orcamento):
-    resultados = {}
+    n = len(projetos)
+    resultados = {
+        "n": n
+    }
     # Brute Force
     tempo = tempo_brute_force(projetos, orcamento)['tempo']
     memoria = memoria_brute_force(projetos, orcamento)['memoria']
