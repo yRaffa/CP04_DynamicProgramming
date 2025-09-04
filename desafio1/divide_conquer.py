@@ -39,8 +39,7 @@ def divide_conquer_d1(projetos: List[Tuple[int, int]], orcamento: int) -> int:
         restante = orcamento - cA
         if restante < 0:
             continue
-        idx = bisect.bisect_right(custos_B, restante) - 1
-        if idx >= 0:
-            melhor = max(melhor, bA + beneficios_B[idx])
-
+        index = bisect.bisect_right(custos_B, restante) - 1
+        if index >= 0:
+            melhor = max(melhor, bA + beneficios_B[index])
     return melhor
