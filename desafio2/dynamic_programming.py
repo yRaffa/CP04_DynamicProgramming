@@ -1,14 +1,12 @@
 from typing import List
 
+# Metodo Dynamic Programming para o Desafio 2
+# Divide o conjunto pela metade, e combina subconjuntos (custo, beneficio) via busca binaria
+# Complexidade: Tempo: O(n), Memoria: O(1)
 def dynamic_programming_d2(dias: List[int]) -> int:
-    """
-    Máxima soma contígua via Kadane (Programação Dinâmica, O(n)).
-    """
-    best_end = dias[0]
-    best_so_far = dias[0]
-
-    for x in dias[1:]:
-        best_end = max(x, best_end + x)
-        best_so_far = max(best_so_far, best_end)
-
-    return best_so_far
+    melhor_soma_atual = dias[0]
+    melhor_soma_global = dias[0]
+    for elemento in dias[1:]:
+        melhor_soma_atual = max(elemento, melhor_soma_atual + elemento)
+        melhor_soma_global = max(melhor_soma_global, melhor_soma_atual)
+    return melhor_soma_global

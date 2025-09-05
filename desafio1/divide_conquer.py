@@ -17,7 +17,7 @@ def _subsets(itens: List[Tuple[int,int]]) -> List[Tuple[int,int]]:
 
 # Metodo Divide & Conquer para o Desafio 1
 # Divide o conjunto pela metade, e combina subconjuntos (custo, beneficio) via busca binaria
-# Complexidade: 
+# Complexidade: Tempo: O(2^(n/2) * n), Memoria: O(2^(n/2))
 def divide_conquer_d1(projetos: List[Tuple[int, int]], orcamento: int) -> int:
     n = len(projetos)
     metade = n // 2
@@ -25,7 +25,7 @@ def divide_conquer_d1(projetos: List[Tuple[int, int]], orcamento: int) -> int:
     projetos_B = projetos[metade:]
     subconjuntos_A = _subsets(projetos_A)
     subconjuntos_B = _subsets(projetos_B)
-    subconjuntos_B.sort(key = lambda x: (x[0], -x[1])) # Ordena subconjuntos_B por custo e remove combinações dominadas
+    subconjuntos_B.sort(key = lambda x: (x[0], -x[1])) # Ordena subconjuntos_B por custo e remove combinações dominadas, mantem uma sequência onde o benefício é não decrescente com o custo
     filtrados = []
     maximo_B = -1
     for cB, bB in subconjuntos_B:

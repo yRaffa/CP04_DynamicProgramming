@@ -29,14 +29,19 @@ def memoria_dynamic_programming(dias):
 
 def executar_d2(dias):
     n = len(dias)
+    resultados = {}
     resultados = {
         "n": n
     }
     # Brute Force
-    tempo = tempo_brute_force(dias)['tempo']
-    memoria = memoria_brute_force(dias)['memoria']
-    resultados['Brute Force (Tempo)'] = tempo
-    resultados['Brute Force (Memória)'] = memoria
+    if n <= 2000:
+        tempo = tempo_brute_force(dias)['tempo']
+        memoria = memoria_brute_force(dias)['memoria']
+        resultados['Brute Force (Tempo)'] = tempo
+        resultados['Brute Force (Memória)'] = memoria
+    else:
+        resultados['Brute Force (Tempo)'] = None
+        resultados['Brute Force (Memória)'] = None
     # Divide & Conquer
     tempo = tempo_divide_conquer(dias)['tempo']
     memoria = memoria_divide_conquer(dias)['memoria']

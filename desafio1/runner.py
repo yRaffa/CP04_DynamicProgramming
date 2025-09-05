@@ -29,14 +29,19 @@ def memoria_dynamic_programming(projetos, orcamento):
 
 def executar_d1(projetos, orcamento):
     n = len(projetos)
+    resultados = {}
     resultados = {
         "n": n
     }
     # Brute Force
-    tempo = tempo_brute_force(projetos, orcamento)['tempo']
-    memoria = memoria_brute_force(projetos, orcamento)['memoria']
-    resultados['Brute Force (Tempo)'] = tempo
-    resultados['Brute Force (Memória)'] = memoria
+    if n <= 20:
+        tempo = tempo_brute_force(projetos, orcamento)['tempo']
+        memoria = memoria_brute_force(projetos, orcamento)['memoria']
+        resultados['Brute Force (Tempo)'] = tempo
+        resultados['Brute Force (Memória)'] = memoria
+    else:
+        resultados['Brute Force (Tempo)'] = None
+        resultados['Brute Force (Memória)'] = None
     # Divide & Conquer
     tempo = tempo_divide_conquer(projetos, orcamento)['tempo']
     memoria = memoria_divide_conquer(projetos, orcamento)['memoria']

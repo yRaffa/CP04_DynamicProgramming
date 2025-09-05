@@ -2,7 +2,7 @@ from typing import List, Tuple
 
 # Metodo Brute Force via BitMask para o Desafio 1
 # Testa todos os subconjuntos e retorna o maior benefício possível sem ultrapassar o orçamento
-# Complexidade: O(2^n * n)
+# Complexidade: Tempo: O(2^n * n), Memoria: O(2^n * n)
 def brute_force_d1(projetos: List[Tuple[int, int]], orcamento: int) -> int:
     n = len(projetos)
     melhor_beneficio = 0

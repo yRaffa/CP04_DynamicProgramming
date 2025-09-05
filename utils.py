@@ -2,6 +2,7 @@ import time
 import tracemalloc
 import random
 import numpy as np
+import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Decorator para medir tempo de execução
@@ -35,84 +36,58 @@ def gerar_testes_d2(n, valor_min = -10, valor_max = 10):
     dias = [random.randint(valor_min, valor_max) for _ in range(n)]
     return dias
 
-'''
-# Função para plotar gráficos de tempo de execução
-def grafico_tempo(df, titulo):
-    plt.figure(figsize = (8,5))
-    for coluna in df.columns:
-        if coluna != 'n':
-            plt.plot(df['n'], df[coluna], marker = 'o', label = coluna)
-    plt.title(titulo)
-    plt.xlabel('Tamanho da entrada (n)')
-    plt.ylabel('Tempo de execução (ms)')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
-
-# Função para plotar gráficos de uso de memória
-def grafico_memoria(df, titulo):
-    plt.figure(figsize = (8,5))
-    for coluna in df.columns:
-        if coluna != 'n':
-            plt.plot(df['n'], df[coluna], marker = 'o', label = coluna)
-    plt.title(titulo)
-    plt.xlabel('Tamanho da entrada (n)')
-    plt.ylabel('Uso de Memória (KB)')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
-'''
-
+# Função para plotar os graficos de tempo
 def grafico_tempo(df, titulo):
     plt.figure(figsize=(10,6))
     for metodo, cor, marcador in zip(
-        ["Brute Force (Tempo)", "Divide & Conquer (Tempo)", "Dynamic Programming (Tempo)"],
-        ["#d62728", "#1f77b4", "#2ca02c"],  # cores: vermelho, azul, verde
-        ["o", "s", "D"]  # circulo, quadrado, diamante
+        ['Brute Force (Tempo)', 'Divide & Conquer (Tempo)', 'Dynamic Programming (Tempo)'],
+        ['#d62728', '#1f77b4', '#2ca02c'],
+        ['o', 's', 'D']
     ):
-        plt.plot(df["n"], df[metodo], marker=marcador, linewidth=2.5, markersize=8, color=cor, label=metodo)
-        for x, y in zip(df["n"], df[metodo]):
-            plt.text(x, y, f"{y:.2f}", fontsize=8, ha="center", va="bottom")
+        plt.plot(df['n'], df[metodo], marker = marcador, linewidth = 2.5, markersize = 8, color = cor, label = metodo)
+        for x, y in zip(df['n'], df[metodo]):
+            plt.text(x, y, f'{y:.2f}', fontsize = 8, ha = 'center', va = 'bottom')
 
-    plt.xlabel("Tamanho da entrada (n)")
-    plt.ylabel("Tempo de execução (ms)")
-    plt.yscale("log")  # log para destacar diferenças grandes
+    plt.xlabel('Tamanho da entrada (n)')
+    plt.ylabel('Tempo de execução (ms)')
+    plt.yscale('log')
     plt.title(titulo)
     plt.legend()
-    plt.grid(True, linestyle="--", alpha=0.7)
+    plt.grid(True, linestyle = '--', alpha = 0.75)
     plt.show()
 
-
+# Função para plotar os graficos de memória
 def grafico_memoria(df, titulo):
-    plt.figure(figsize=(10,6))
+    plt.figure(figsize = (10,6))
     for metodo, cor, estilo in zip(
-        ["Brute Force (Memória)", "Divide & Conquer (Memória)", "Dynamic Programming (Memória)"],
-        ["#ff7f0e", "#9467bd", "#8c564b"],  # cores laranja, roxo, marrom
-        ["--", "-.", ":"]
+        ['Brute Force (Memória)', 'Divide & Conquer (Memória)', 'Dynamic Programming (Memória)'],
+        ['#ff8800', '#8c27ff', '#fff344'],  # cores laranja, roxo, marrom
+        ['--', '-.', ':']
     ):
-        plt.plot(df["n"], df[metodo], linestyle=estilo, linewidth=2.5, marker="o", markersize=6, color=cor, label=metodo)
-        plt.fill_between(df["n"], df[metodo], alpha=0.15, color=cor)
+        plt.plot(df['n'], df[metodo], linestyle = estilo, linewidth = 2.5, marker = 'o', markersize = 6, color = cor, label = metodo)
+        plt.fill_between(df['n'], df[metodo], alpha = 0.15, color = cor)
 
-    plt.xlabel("Tamanho da entrada (n)")
-    plt.ylabel("Uso de memória (KB)")
+    plt.xlabel('Tamanho da entrada (n)')
+    plt.ylabel('Uso de memória (KB)')
     plt.title(titulo)
     plt.legend()
-    plt.grid(True, linestyle="--", alpha=0.7)
+    plt.grid(True, linestyle = '--', alpha = 0.75)
     plt.show()
 
-def grafico_comparativo(df, titulo, metrica="Tempo"):
-    x = np.arange(len(df["n"]))
+# Função para plotar os graficos comparativo
+def grafico_comparativo(df, titulo, metrica):
+    x = np.arange(len(df['n']))
     largura = 0.25
 
-    plt.figure(figsize=(12,6))
-    plt.bar(x - largura, df[f"Brute Force ({metrica})"], width=largura, color="#d62728", label="Brute Force")
-    plt.bar(x, df[f"Divide & Conquer ({metrica})"], width=largura, color="#1f77b4", label="Divide & Conquer")
-    plt.bar(x + largura, df[f"Dynamic Programming ({metrica})"], width=largura, color="#2ca02c", label="Dynamic Programming")
+    plt.figure(figsize = (12,6))
+    plt.bar(x - largura, df[f'Brute Force ({metrica})'], width = largura, color = '#d64a27', label = 'Brute Force')
+    plt.bar(x, df[f'Divide & Conquer ({metrica})'], width = largura, color = '#3d21e0', label = 'Divide & Conquer')
+    plt.bar(x + largura, df[f'Dynamic Programming ({metrica})'], width = largura, color = '#b6fa37', label = 'Dynamic Programming')
 
-    plt.xticks(x, df["n"])
-    plt.xlabel("Tamanho da entrada (n)")
-    plt.ylabel(f"{metrica}")
-    plt.title(f"{titulo} - {metrica}")
+    plt.xticks(x, df['n'])
+    plt.xlabel('Tamanho da entrada (n)')
+    plt.ylabel(f'{metrica}')
+    plt.title(f'{titulo} - {metrica}')
     plt.legend()
-    plt.grid(True, axis="y", linestyle="--", alpha=0.6)
+    plt.grid(True, axis = 'y', linestyle = '--', alpha = 0.75)
     plt.show()

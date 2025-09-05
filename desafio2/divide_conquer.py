@@ -1,31 +1,30 @@
 from typing import List
 
+# Metodo Divide & Conquer para o Desafio 2
+# Calcula qual o melhor subconjunto, e retorna o valor maximo dentro deles
+# Complexidade: Tempo: O(n log n), Memoria: O(log n)
 def divide_conquer_d2(dias: List[int]) -> int:
-    """
-    Máxima soma contígua via Divide & Conquer (O(n log n)).
-    """
+    def rec(e: int, d: int) -> int:
+        if e == d:
+            return dias[e]
+        meio_intervalo = (e + d) // 2
 
-    def rec(l: int, r: int) -> int:
-        if l == r:
-            return dias[l]
-        m = (l + r) // 2
-
-        left_best = rec(l, m)
-        right_best = rec(m + 1, r)
+        melhor_esquerda = rec(e, meio_intervalo)
+        melhor_direita = rec(meio_intervalo + 1, d)
 
         # melhor sufixo da esquerda
-        soma, best_left_suffix = 0, float("-inf")
-        for i in range(m, l - 1, -1):
+        soma, melhor_esquerda_sufixo = 0, float('-inf')
+        for i in range(meio_intervalo, e - 1, -1):
             soma += dias[i]
-            best_left_suffix = max(best_left_suffix, soma)
+            melhor_esquerda_sufixo = max(melhor_esquerda_sufixo, soma)
 
         # melhor prefixo da direita
-        soma, best_right_prefix = 0, float("-inf")
-        for i in range(m + 1, r + 1):
+        soma, melhor_direita_prefixo = 0, float('-inf')
+        for i in range(meio_intervalo + 1, d + 1):
             soma += dias[i]
-            best_right_prefix = max(best_right_prefix, soma)
+            melhor_direita_prefixo = max(melhor_direita_prefixo, soma)
 
-        cross = best_left_suffix + best_right_prefix
-        return max(left_best, right_best, cross)
+        combinacao = melhor_esquerda_sufixo + melhor_direita_prefixo
+        return max(melhor_esquerda, melhor_direita, combinacao)
 
     return rec(0, len(dias) - 1)

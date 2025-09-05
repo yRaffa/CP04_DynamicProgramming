@@ -1,15 +1,14 @@
 from typing import List
 
+# Metodo Brute Force via BitMask para o Desafio 2
+# Testa todos os subconjuntos e acumula a soma incremental de dias retorna o maior elemento (dias)
+# Complexidade: Tempo: O(n^2), Memoria: O(1)
 def brute_force_d2(dias: List[int]) -> int:
-    """
-    Máxima soma contígua via força bruta O(n^2).
-    Testa todas as janelas possíveis acumulando soma.
-    """
     n = len(dias)
-    best = dias[0]
+    melhor_dia = dias[0]
     for i in range(n):
         soma = 0
         for j in range(i, n):
             soma += dias[j]
-            best = max(best, soma)
-    return best
+            melhor_dia = max(melhor_dia, soma)
+    return melhor_dia
